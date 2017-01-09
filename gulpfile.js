@@ -48,21 +48,21 @@ function bundle() {
         .plugin('vueify/plugins/extract-css', {
             out: 'dist/bundle.css' // can also be a WritableStream
         })
-        // .transform(babelify, {
-        //     presets: [
-        //         'es2015', //转换es6代码
-        //         'stage-0', //指定转换es7代码的语法提案阶段
-        //     ],
-        //     plugins: [
-        //         'transform-object-assign', //转换es6 Object.assign插件
-        //         ['transform-es2015-classes', {
-        //             "loose": false
-        //         }], //转换es6 class插件
-        //         ['transform-es2015-modules-commonjs', {
-        //             "loose": false
-        //         }] //转换es6 module插件
-        //     ]
-        // })
+        .transform(babelify, {
+            presets: [
+                'es2015', //转换es6代码
+                'stage-0', //指定转换es7代码的语法提案阶段
+            ],
+            plugins: [
+                'transform-object-assign', //转换es6 Object.assign插件
+                ['transform-es2015-classes', {
+                    "loose": false
+                }], //转换es6 class插件
+                ['transform-es2015-modules-commonjs', {
+                    "loose": false
+                }] //转换es6 module插件
+            ]
+        })
         .bundle();
 }
 
@@ -124,7 +124,7 @@ gulp.task('js', function () {
 
 gulp.task('serve', ['copy', 'devBuild'], function () {
     browserSync.init({
-        open: false,
+        open: true, // 是否启动打开浏览器
         server: [
             './dist',
             './assets/data',

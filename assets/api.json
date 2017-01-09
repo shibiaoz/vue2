@@ -1,0 +1,9 @@
+{
+    "getTokenApi": {
+        "serve": "getToken.json",
+        "dev": "http://100.73.12.24:8081/payfront/web/appRepayLogin",
+        "test": "http://otofront.test.jiedaibao.com/payfront/web/appRepayLogin",
+        "beta": "http://beta-tradeapi.jiedaibao.com/payfront/web/appRepayLogin",
+        "prod": "https://tradeapi.jiedaibao.com/payfront/web/appRepayLogin"
+    }
+}

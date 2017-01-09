@@ -1,0 +1,4 @@
+dev,gulp dev,dist
+test,gulp test,dist
+beta,gulp beta,dist
+prod,gulp prod,dist

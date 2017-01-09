@@ -32,8 +32,6 @@ try {
     apiConfigStr = fs.readFileSync('./assets/api.json').toString();
     console.log(apiConfigStr);
     apiConfig = json.parse(apiConfigStr, null, true);
-    console.log('-----');
-    console.log(apiConfig);
 } catch (e) {
     console.log(new Error('parse api.json error'));
     apiConfig = {};
@@ -152,7 +150,6 @@ gulp.task('devBuild', function () {
             }
             console.log(apiConfig);
             console.log(apiName+'->'+apiType);
-            // apiMock 优先级高于环境选择
             return apiConfig[apiName][apiType];
         }))
         .pipe(gulp.dest('./dist'));
@@ -167,13 +164,10 @@ gulp.task('dev', ['copy'], function () {
             loadMaps: true
         }))
         .pipe(replace(/{{(.+Api)}}/g, function (match, apiName) {
-            console.log(apiName);
-            console.log(apiConfig);
             if (!apiConfig[apiName]) {
                 console.log('Api replace error, apiName: "' + apiName + '", check your code and api.json');
                 return '';
             }
-            // apiMock 优先级高于环境选择
             return apiConfig[apiName][apiType];
         }))
         .pipe(gulp.dest('./dist'));
@@ -202,7 +196,6 @@ gulp.task('prod', function () {
                 console.log('Api replace error, apiName: "' + apiName + '", check your code and api.json');
                 return '';
             }
-            // apiMock 优先级高于环境选择
             return apiConfig[apiName][apiType];
         }))
         .pipe(gulp.dest('./dist'));

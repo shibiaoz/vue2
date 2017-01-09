@@ -1,4 +1,3 @@
-// app.vue
 <style>
     .red {
         color: #f00;

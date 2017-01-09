@@ -1,10 +1,9 @@
 // main.js
-// var Vue = require('vue/dist/vue.js');
-var Vue = require('vue/dist/vue.js');
+var Vue = require('vue/dist/vue.min.js');
 var App = require('./app.vue');
 var VueRouter = require('vue-router');
 var router = require('./router.js');
-var $ = require('zepto');
+var request = require('superagent');
 Vue.use(VueRouter);
 new Vue({
   router: router,

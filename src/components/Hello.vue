@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import request from 'superagent';
 export default  {
   name:'hello',
   data () {
@@ -23,14 +24,20 @@ export default  {
   },
   methods: {
       click: function () {
-          $.ajax({
-              url:'{{getTokenApi}}',
-              method:'POST',
-              dataType:'json',
-              success: function (res) {
-                  alert(JSON.stringify(res));
-              }
-          })
+        //   $.ajax({
+        //       url:'{{getTokenApi}}',
+        //       method:'POST',
+        //       dataType:'json',
+        //       success: function (res) {
+        //           alert(JSON.stringify(res));
+        //       }
+        //   });
+          request
+            .get('{{getTokenApi}}')
+            .query({ action: 'edit', city: 'London' }) // query string
+            .end(function(err, res){
+                 alert(JSON.stringify(res));
+            });
       }
   }
 

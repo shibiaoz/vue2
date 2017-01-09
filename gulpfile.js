@@ -99,7 +99,7 @@ gulp.task('testBuild', function () {
             ]
         })
         .bundle()
-        .pipe(source('js/bundle.js'))
+        .pipe(source('bundle.js'))
         .pipe(buffer())
         .on('error', function (err) {
             console.log(err);
@@ -114,8 +114,8 @@ gulp.task('testBuild', function () {
 
 gulp.task('js', function () {
     var b = bundle();
-    b.pipe(source('js/bundle.js'))
-        // .pipe(rename('js/bundle.js'))
+    b.pipe(source('bundle.js'))
+        // .pipe(rename('bundle.js'))
         .pipe(gulp.dest('./dist'));
 });
 
@@ -137,7 +137,7 @@ gulp.task('serve', ['copy', 'devBuild'], function () {
 
 gulp.task('devBuild', function () {
     var b = bundle();
-    b.pipe(source('js/bundle.js'))
+    b.pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({
             loadMaps: true
@@ -158,8 +158,9 @@ gulp.task('devBuild', function () {
 gulp.task('dev', ['copy'], function () {
     var apiType = 'dev';
     var b = bundle();
-    b.pipe(source('js/bundle.js'))
+    b.pipe(source('bundle.js'))
         .pipe(buffer())
+         .pipe(uglify())
         .pipe(sourcemaps.init({
             loadMaps: true
         }))
@@ -185,7 +186,7 @@ gulp.task('beta', function () {
 gulp.task('prod', function () {
     apiType = 'prod';
     var b = bundle();
-    b.pipe(source('js/bundle.js'))
+    b.pipe(source('bundle.js'))
         .pipe(buffer())
         // uglify 之前必须要用buffer，gulp-uglify只支持Buffer类型的Vinyl File Object
         .pipe(uglify())

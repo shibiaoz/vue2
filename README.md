@@ -1,3 +1,5 @@
+# vue2
+vue2 spa demo
 > 
 Vinyl File Object的contents可以有三种类型：Stream、Buffer（二进制数据）、Null（就是JavaScript里的null）。需要注意的是，各类Gulp插件虽然操作的都是Vinyl File Object，但可能会要求不同的类型。
 gulp-uglify这种需要对JavaScript代码做语法分析的，就必须保证代码的完整性，因此，gulp-uglify只支持Buffer类型的Vinyl File Object。
@@ -11,3 +13,4 @@ gulp-uglify这种需要对JavaScript代码做语法分析的，就必须保证�
 ## refrence
 - [gulp stream](https://segmentfault.com/a/1190000003770541)
 - [browserify](https://www.w3cplus.com/workflow/gulp-tutorial-5-javascripts-browserify.html)
+

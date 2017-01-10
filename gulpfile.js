@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
+// var uglify = require('uglify-js');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 var babelify = require('babelify');
@@ -75,7 +76,13 @@ function watchChange() {
     gulp.watch('./index.html', ['copy']);
     gulp.watch('./index.html').on('change', reload);
 }
+gulp.task('set-dev-node-env', function () {
+    return process.env.NODE_ENV = 'development';
+});
 
+gulp.task('set-prod-node-env', function () {
+    return process.env.NODE_ENV = 'production';
+});
 
 gulp.task('testBuild', function () {
     browserify('./src/main.js')
@@ -143,13 +150,11 @@ gulp.task('devBuild', function () {
             loadMaps: true
         }))
         .pipe(replace(/{{(.+Api)}}/g, function (match, apiName) {
-           
+
             if (!apiConfig[apiName]) {
                 console.log('Api replace error, apiName: "' + apiName + '", check your code and api.json');
                 return '';
             }
-            console.log(apiConfig);
-            console.log(apiName+'->'+apiType);
             return apiConfig[apiName][apiType];
         }))
         .pipe(gulp.dest('./dist'));
@@ -160,7 +165,7 @@ gulp.task('dev', ['copy'], function () {
     var b = bundle();
     b.pipe(source('bundle.js'))
         .pipe(buffer())
-         .pipe(uglify())
+        .pipe(uglify())
         .pipe(sourcemaps.init({
             loadMaps: true
         }))
@@ -183,13 +188,19 @@ gulp.task('beta', function () {
 });
 
 
-gulp.task('prod', function () {
+gulp.task('prod', ['set-prod-node-env'], function () {
     apiType = 'prod';
     var b = bundle();
     b.pipe(source('bundle.js'))
         .pipe(buffer())
         // uglify 之前必须要用buffer，gulp-uglify只支持Buffer类型的Vinyl File Object
-        .pipe(uglify())
+        .pipe(uglify({
+            compress: {
+                warnings: false,
+                booleans: false,
+                unused: false
+            }
+        }))
         .pipe(replace(/{{(.+Api)}}/g, function (match, apiName) {
             console.log(apiName);
             console.log(apiConfig);

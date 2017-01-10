@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > dist/build.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,11 @@
     "vue": "^2.1.8",
     "vue-router": "^2.1.1",
     "zepto": "1.1.6"
+  },
+  "browserify": {
+    "transform": [
+      "vueify"
+    ]
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
@@ -32,6 +38,7 @@
     "gulp-uglify": "^2.0.0",
     "shelljs": "^0.7.6",
     "superagent": "^3.3.1",
+    "uglify-js": "^2.7.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vueify": "^9.4.0"

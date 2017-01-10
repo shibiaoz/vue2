@@ -19,4 +19,5 @@ gulp-uglify这种需要对JavaScript代码做语法分析的，就必须保证�
 ## refrence
 - [gulp stream](https://segmentfault.com/a/1190000003770541)
 - [browserify](https://www.w3cplus.com/workflow/gulp-tutorial-5-javascripts-browserify.html)
+- [NODE_ENV production 减小包体积](http://stackoverflow.com/questions/28939762/removing-process-env-node-env-with-browserify-envify)
 
